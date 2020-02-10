@@ -1,18 +1,25 @@
 import Link from 'next/link'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Counter from './counter'
 import Clock from './clock'
 
 function Page({
-  error,
-  lastUpdate,
-  light,
+  // error,
+  // lastUpdate,
+  // light,
   linkTo,
   NavigateTo,
-  placeholderData,
+  // placeholderData,
   title,
 }) {
+  const { error, placeholderData, lastUpdate, light } = useSelector(state => {
+    state.userData.error,
+    state.userData.placeholderData,
+    state.clock.lastUpdate,
+    state.clock.light
+  })
+  // console.log(...state);
   return (
     <div>
       <h1>{title}</h1>
@@ -33,4 +40,5 @@ function Page({
   )
 }
 
-export default connect(state => state)(Page)
+// export default connect(state => state)(Page)
+export default Page

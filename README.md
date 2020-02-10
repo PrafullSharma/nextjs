@@ -61,7 +61,7 @@ For safety it is recommended to wrap all pages, no matter if they use Redux or n
 
 To pass the initial state from the server to the client we pass it as a prop called `initialState` so then it's available when the client takes over.
 
-The trick here for supporting universal redux is to separate the cases for the client and the server. When we are on the server we want to create a new store every time, otherwise different users data will be mixed up. If we are in the client we want to use always the same store. That's what we accomplish in `store.js`
+The trick here for supporting universal redux is to separate the cases for the client and the server. When we are on the server we want to create a new store every time, otherwise different users data will be mixed up. If we are in the client we want to use always the same store. That's what we accomplish in `configureStore.js`
 
 The clock, under `components/clock.js`, has access to the state using the `connect` function from `react-redux`. In this case Clock is a direct child from the page but it could be deep down the render tree.
 
@@ -69,9 +69,9 @@ The second example, under `components/counter.js`, shows a simple add counter fu
 
 ## What changed with next-redux-saga
 
-The digital clock is updated every second using the `runClockSaga` found in `saga.js`.
+The digital clock is updated every second using the `runClockSaga` found in `rootSaga.js`.
 
-All pages are also being wrapped by `next-redux-saga` using a helper function from `store.js`:
+All pages are also being wrapped by `next-redux-saga` using a helper function from `configureStore.js`:
 
 ```js
 import withRedux from 'next-redux-wrapper'
@@ -118,4 +118,4 @@ export function withReduxSaga(...connectArgs) {
 
 Since `redux-saga` is like a separate thread in your application, we need to tell the server to END the running saga when all asynchronous actions are complete. This is automatically handled for you by wrapping your components in `next-redux-saga`. To illustrate this, `pages/index.js` loads placeholder JSON data on the server from [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users). If you refresh `pages/other.js`, the placeholder JSON data will **NOT** be loaded on the server, however, the saga is running on the client. When you click _Navigate_, you will be taken to `pages/index.js` and the placeholder JSON data will be fetched from the client. The placeholder JSON data will only be fetched **once** from the client or the server.
 
-After introducing `redux-saga` there was too much code in `store.js`. For simplicity and readability, the actions, reducers, sagas, and store creators have been split into seperate files: `actions.js`, `reducer.js`, `saga.js`, `store.js`
+After introducing `redux-saga` there was too much code in `configureStore.js`. For simplicity and readability, the actions, reducers, sagas, and store creators have been split into seperate files: `actionCreators.js`, `rootReducer.js`, `rootSaga.js`, `configureStore.js`
