@@ -1,29 +1,29 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 
-import { loadData } from '../src/redux/UserData/actionCreators'
+import {loadData} from '../src/redux/UserData/actionCreators'
 import {startClock, tickClock} from '../src/redux/Clock/actionCreators'
 import Page from '../src/components/page'
 
-class Index extends React.Component {
-  static async getInitialProps(props) {
-    const { store, isServer } = props.ctx
-    store.dispatch(tickClock(isServer))
+const Index = () => {
+  const dispatch = useDispatch()
 
-    if (!store.getState().placeholderData) {
-      store.dispatch(loadData())
-    }
+  useEffect(() => {
+    dispatch(startClock())
+  })
 
-    return { isServer }
-  }
-
-  componentDidMount() {
-    this.props.dispatch(startClock())
-  }
-
-  render() {
-    return <Page title="Index Page" linkTo="/other" NavigateTo="Other Page" />
-  }
+  return <Page title="Index Page" linkTo="/other" NavigateTo="Other Page"/>
 }
 
-export default connect()(Index)
+Index.getInitialProps = async (props) => {
+  const {store, isServer} = props.ctx
+  store.dispatch(tickClock(isServer))
+
+  if (!store.getState().placeholderData) {
+    store.dispatch(loadData())
+  }
+
+  return {isServer}
+}
+
+export default Index

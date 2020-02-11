@@ -4,22 +4,12 @@ import { useSelector } from 'react-redux'
 import Counter from './counter'
 import Clock from './clock'
 
-function Page({
-  // error,
-  // lastUpdate,
-  // light,
-  linkTo,
-  NavigateTo,
-  // placeholderData,
-  title,
-}) {
-  const { error, placeholderData, lastUpdate, light } = useSelector(state => {
-    state.userData.error,
-    state.userData.placeholderData,
-    state.clock.lastUpdate,
-    state.clock.light
-  })
-  // console.log(...state);
+export default ({linkTo, NavigateTo, title}) => {
+  const error = useSelector(state => state.userData.error)
+  const placeholderData = useSelector(state => state.userData.placeholderData)
+  const lastUpdate = useSelector(state => state.clock.lastUpdate)
+  const light = useSelector(state => state.clock.light)
+
   return (
     <div>
       <h1>{title}</h1>
@@ -39,6 +29,3 @@ function Page({
     </div>
   )
 }
-
-// export default connect(state => state)(Page)
-export default Page

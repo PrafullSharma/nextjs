@@ -19,7 +19,7 @@ function Clock({ lastUpdate, light }) {
           display: inline-block;
           color: #82fa58;
           font: 50px menlo, monaco, monospace;
-          background-color: #000;
+          background-color: red;
         }
         .light {
           background-color: #999;

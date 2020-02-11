@@ -69,7 +69,7 @@ The second example, under `components/counter.js`, shows a simple add counter fu
 
 ## What changed with next-redux-saga
 
-The digital clock is updated every second using the `runClockSaga` found in `rootSaga.js`.
+The digital clock is updated every second using the `runClockSaga` found in `indexSaga.js`.
 
 All pages are also being wrapped by `next-redux-saga` using a helper function from `configureStore.js`:
 
@@ -118,4 +118,4 @@ export function withReduxSaga(...connectArgs) {
 
 Since `redux-saga` is like a separate thread in your application, we need to tell the server to END the running saga when all asynchronous actions are complete. This is automatically handled for you by wrapping your components in `next-redux-saga`. To illustrate this, `pages/index.js` loads placeholder JSON data on the server from [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users). If you refresh `pages/other.js`, the placeholder JSON data will **NOT** be loaded on the server, however, the saga is running on the client. When you click _Navigate_, you will be taken to `pages/index.js` and the placeholder JSON data will be fetched from the client. The placeholder JSON data will only be fetched **once** from the client or the server.
 
-After introducing `redux-saga` there was too much code in `configureStore.js`. For simplicity and readability, the actions, reducers, sagas, and store creators have been split into seperate files: `actionCreators.js`, `rootReducer.js`, `rootSaga.js`, `configureStore.js`
+After introducing `redux-saga` there was too much code in `configureStore.js`. For simplicity and readability, the actions, reducers, sagas, and store creators have been split into seperate files: `actionCreators.js`, `indexReducer.js`, `indexSaga.js`, `configureStore.js`
