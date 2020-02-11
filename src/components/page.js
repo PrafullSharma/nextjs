@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { useSelector } from 'react-redux'
 
+import Link from '../theme/Link'
 import Counter from './counter'
 import Clock from './clock'
 
@@ -16,8 +16,8 @@ export default ({linkTo, NavigateTo, title}) => {
       <Clock lastUpdate={lastUpdate} light={light} />
       <Counter />
       <nav>
-        <Link href={linkTo}>
-          <a>Navigate: {NavigateTo}</a>
+        <Link href={linkTo} color="primary" variant="inherit">
+          Navigate: {NavigateTo}
         </Link>
       </nav>
       {placeholderData && (
