@@ -13,6 +13,7 @@ export default ({linkTo, NavigateTo, title}) => {
   return (
     <div>
       <h1>{title}</h1>
+      <p>coming from env: {process.env.TEST_VAR}</p>
       <Clock lastUpdate={lastUpdate} light={light} />
       <Counter />
       <nav>
