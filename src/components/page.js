@@ -1,8 +1,10 @@
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 import Link from '../theme/Link'
 import Counter from './counter'
 import Clock from './clock'
+import testscss from '../styles/test.scss'
 
 export default ({linkTo, NavigateTo, title}) => {
   const error = useSelector(state => state.userData.error)
@@ -12,6 +14,7 @@ export default ({linkTo, NavigateTo, title}) => {
 
   return (
     <div>
+      <style jsx>{testscss}</style>
       <h1>{title}</h1>
       <p>coming from env: {process.env.TEST_VAR}</p>
       <Clock lastUpdate={lastUpdate} light={light} />
