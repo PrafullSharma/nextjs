@@ -1,6 +1,6 @@
 import React from 'react'
 import App from 'next/app'
-import Head from 'next/head'
+import { DefaultSeo } from 'next-seo'
 import {Provider} from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
@@ -8,6 +8,7 @@ import {ThemeProvider} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import createStore from '../src/redux/configureStore'
+import SEO from '../next-seo.config'
 import theme from '../src/theme'
 
 class MyApp extends App {
@@ -33,10 +34,7 @@ class MyApp extends App {
     const {Component, pageProps, store} = this.props
     return (
       <React.Fragment>
-        <Head>
-          <title>My page</title>
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
-        </Head>
+        <DefaultSeo {...SEO} />
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline/>
